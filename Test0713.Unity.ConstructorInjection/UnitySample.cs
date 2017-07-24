@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test0713.Unity
+namespace Test0713.Unity.ConstructorInjection
 {
     public interface ICustomerDataAccess
     {
@@ -30,7 +30,10 @@ namespace Test0713.Unity
 
     public class Customer
     {
-        [Dependency]
+        public Customer(ICustomerDataAccess customerDataAccess)
+        {
+            CustomerDataAccess = customerDataAccess;
+        }
         public ICustomerDataAccess CustomerDataAccess { get; set; }
         public string DbType { get; set; }
         //public Customer()
@@ -50,6 +53,11 @@ namespace Test0713.Unity
         public void Save()
         {
             CustomerDataAccess.Save(this);
+        }
+        [InjectionMethod]
+        public void SetDataAccess(ICustomerDataAccess dataAccess)
+        {
+            CustomerDataAccess = dataAccess;
         }
     }
 }

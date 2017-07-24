@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,12 @@ namespace Test0713.Unity
     {
         static void Main(string[] args)
         {
-            Customer c = new Customer() { DbType="sql"};
+            var container =new  UnityContainer();
+            UnitySetup.Config(container);
+            Customer c = new Customer();
+            c.CustomerDataAccess = container.Resolve<ICustomerDataAccess>("mysql");
             c.Save();
+            //ICustomerDataAccess dataAccess = container.
             Console.ReadKey();
         }
     }
