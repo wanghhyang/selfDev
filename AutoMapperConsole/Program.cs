@@ -16,6 +16,9 @@ namespace AutoMapperConsole
 
             FirstMapper mapper = new FirstMapper();
             mapper.MapperTest();
+
+            SecondMapper secondMapper = new SecondMapper();
+            secondMapper.MapBookStore();
         }
     }
 }
